@@ -1,7 +1,6 @@
 const express = require('express') //express 모듈 가져옴
 //const { truncateSync } = require('fs')
 const app = express()
-const port = 5000
 const bodyParser = require("body-parser");
 const config = require('./config/key');
 
@@ -21,6 +20,10 @@ mongoose.connect(config.mongoURI, {
 
 app.get('/', (req, res) => res.send('Hello World! 노드몬 테스트 중'))
 
+app.get('/api/hello', (req, res) => {
+    res.send('[전달 성공] 안녕하세요!') //프론트에 메시지(response) 전달
+})
+
 app.post('/register', (req, res) => { //회원가입을 위한 라우터
 //클라이언트가 보내주는 정보를 가져와서
 //그것들을 DB에 넣는다
@@ -28,10 +31,11 @@ app.post('/register', (req, res) => { //회원가입을 위한 라우터
     user.save((err, doc) => {
         if(err) return res.json({success: false, err})
         return res.status(200).json({ 
-            success: true //성공하면(status 200) json형식으로 아래와 같이 띄워라
+            success: true //성공하면(status=200) json형식으로 아래와 같이 띄워라
 
         })
     })
 })
 
+const port = 5000
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
