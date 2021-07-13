@@ -3,7 +3,7 @@ import Axios from 'axios'
 import {useDispatch} from 'react-redux';   // dispatch를 통해서 action을 취함. 그리고 redux로 감
 import {loginUser} from '../../../_actions/user_action';
 
-function LoginPage() {
+function LoginPage(props) {
     const dispatch = useDispatch();
 
     const [Email, setEmail] = useState("")
@@ -29,6 +29,13 @@ function LoginPage() {
         }
 
         dispatch(loginUser(body))  // loginUser라는 action
+            .then(response=>{
+                if(response.payload.loginSuccess){
+                    props.history.push('/') //로그인 성공하면 랜딩페이지(/, root page)로 이동
+                } else{
+                    alert('Error')
+                }                
+            }) 
 
     }
 
