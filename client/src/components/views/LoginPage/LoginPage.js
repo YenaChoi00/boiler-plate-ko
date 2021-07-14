@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import Axios from 'axios'
 import {useDispatch} from 'react-redux';   // dispatch를 통해서 action을 취함. 그리고 redux로 감
 import {loginUser} from '../../../_actions/user_action';
+import { withRouter } from 'react-router-dom'; 
 
 function LoginPage(props) {
     const dispatch = useDispatch();
@@ -60,4 +61,4 @@ function LoginPage(props) {
     )
 }
 
-export default LoginPage
+export default withRouter(LoginPage)

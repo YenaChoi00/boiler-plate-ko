@@ -17,7 +17,6 @@ let auth = (req, res, next) => {
         req.user = user;
         next();     // 이 함수는 미들웨어로 끝나면 원래 진행되던 함수(index.js의)가 계속되어야 한다.
     })
-       
 }
 
 module.exports = { auth };
