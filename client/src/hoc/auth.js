@@ -15,10 +15,21 @@ export default function (SpecificComponent, option, adminRoute = null){
         
         useEffect(() => {
             dispatch(auth()).then(response => {    // auth는 user_action에 정의됨. response에는 백엔드에서 처리해서 가져온 정보가 들어있음 
-                console.log(response)
+                // 로그인X
+                if(!response.payload.isAuth){
+                    if(option){
+                        props.history.push('/login')
+                    }
+
+                }else{ // 로그인O
+                    if(adminRoute && !response.payload.isAdmin){    // 어드민이 아닌데 어드민 페이지 접근
+                        props.history.push('/')
+                    } else{
+                        props.history.push('/')
+                    }
+                }
             })
 
-            Axios.get('api/users/auth')
         }, [])
         return (
             <SpecificComponent/>

@@ -13,9 +13,9 @@ function LandingPage(props) {
         axios.get('/api/users/logout')
         .then(response => {
             if(response.payloag.success){
-                props.history.push("/logout")
+                props.history.push("/login")    // 성공하면 로그인페이지로 이동
             } else{
-                alert("Failed to login")
+                alert("Failed to logout")
             } 
         })
     }
@@ -34,4 +34,4 @@ function LandingPage(props) {
     )
 }
 
-export default LandingPage
+export default withRouter(LandingPage)
